@@ -1,46 +1,70 @@
 import firebase from "firebase/app";
 import React from 'react';
+import { Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-function Signin(){
 
-  function doSignIn(event) {
+class Signin extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      redirectToHome: false
+    }
+  }
+
+  handleRedirect = () => {
+    this.setState({
+      redirectToHome: true
+    })
+  }
+
+  doSignIn = (event) => {
     event.preventDefault();
     const email = event.target.signinEmail.value;
     const password = event.target.signinPassword.value;
-    firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-      console.log("Sensei, I have logged you in. Be well.");
-    }).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, password).then(
+      this.handleRedirect()
+    ).catch(function (error) {
       console.log(error.message);
     });
   }
 
-  function doSignOut() {
-    firebase.auth().signOut().then(function() {
+  doSignOut = () => {
+    firebase.auth().signOut().then(function () {
       console.log("Successfully signed out!");
-    }).catch(function(error) {
+    }).catch(function (error) {
       console.log(error.message);
     });
   }
 
-  
-  return (
-    <React.Fragment>
-      <h1>Sign In</h1>
-      <form onSubmit={doSignIn}>
-        <input
-          type='text'
-          name='email'
-          placeholder='email' />
-        <input
-          type='password'
-          name='password'
-          placeholder='Password'/>
-        <button type='submit'>Sign In</button>  
-       <h1>Sign Out</h1> 
-       <button onClick={doSignOut}>Sign Out</button>
-      </form>
-    </React.Fragment>
-  )
+  render() {
+    if (this.state.redirectToHome) {
+      return <Redirect to="/"/>
+    } else {
+        return (
+        <React.Fragment>
+          <p>Sign In</p>
+          <form className="form-group" onSubmit={this.doSignIn}>
+            <input
+              className="form-control"
+              type='text'
+              name='signinEmail'
+              placeholder='email' />
+            <input
+              className="form-control"
+              type='password'
+              name='signinPassword'
+              placeholder='Password' />
+            <button className="btn btn-outline-dark btn-sm btn-block" type='submit'>Sign In</button>
+            <p>Sign Out</p>
+            <button className="btn btn-outline-dark btn-sm" onClick={this.doSignOut}>Sign Out</button>
+          </form>
+          <Link className="btn btn-outline-dark btn-sm" to="/">Home</Link>
+        </React.Fragment>
+      )
+    }
+  }
 }
 
 export default Signin;

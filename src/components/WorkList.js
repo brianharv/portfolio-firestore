@@ -12,9 +12,6 @@ function WorkList(props) {
 
   const works = useSelector(state => state.firestore.ordered.works);
 
-  // <h3>This is a work</h3>
-  // <img src="#" alt="Work Thumbnail" width="200" height="250"></img>
-
   if (isLoaded(works)) {
     return (
       <React.Fragment>

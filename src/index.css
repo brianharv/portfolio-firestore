@@ -54,3 +54,7 @@ body {
 .formHolder {
   margin-top: 100px;
 }
+
+input {
+  margin-bottom: 10px;
+}

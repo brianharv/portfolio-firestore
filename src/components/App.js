@@ -12,7 +12,7 @@ function App() {
       <div className="main">
       <Switch>
         <Route path="/signin">
-          <Signin/>
+          <Signin />
         </Route>
         <Route patch="/">
           <WorkControl/>

@@ -7,6 +7,9 @@ import { withFirestore, isLoaded } from 'react-redux-firebase';
 import WorkDetail from './WorkDetail';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router'
+import { Link } from 'react-router-dom';
+
 
 
 class WorkControl extends React.Component {
@@ -66,6 +69,25 @@ class WorkControl extends React.Component {
   }
 
   render(){
+
+    const auth = this.props.firebase.auth();
+    if(!isLoaded(auth)) {
+      return (
+        <React.Fragment>
+          <h1>Loading...</h1>
+        </React.Fragment>
+      )
+    }
+    if ((isLoaded(auth)) && (auth.currentUser == null)) {
+      return (
+        <React.Fragment>
+          <p className="">You must be signed in to access this page</p>
+          <button className="btn btn-outline-dark"><Link to="/signin">Sign In</Link></button>
+        </React.Fragment>
+      )
+    }
+    if((isLoaded(auth)) && (auth.currentUser != null)) {
+      console.log("test");
     let currentlyVisibleState = null;
     let returnButton = null;
     if (this.state.editing) {
@@ -90,12 +112,13 @@ class WorkControl extends React.Component {
     } else {
       currentlyVisibleState = <WorkList onClickingNew={this.handleClick} workList={this.props.masterWorkList} onWorkSelection={this.handleChangingSelectedWork} />;
     }
-    return(
+    return (
       <React.Fragment>
         {currentlyVisibleState} 
         {returnButton}
       </React.Fragment>
-    )
+      )
+    }
   }
 }
 
