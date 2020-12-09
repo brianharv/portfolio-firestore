@@ -70,17 +70,23 @@ class WorkControl extends React.Component {
     let returnButton = null;
     if (this.state.editing) {
       currentlyVisibleState = <EditWorkForm work = {this.state.selectedWork} onEditWork = {this.handleEditingWorkInList} />
-      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
+      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+    </svg></button>;
     } else if (this.state.selectedWork != null) {
       currentlyVisibleState = 
       <WorkDetail 
         work = {this.state.selectedWork}
         onClickingDelete = {this.handleDeletingWork}
         onClickingEdit = {this.handleEditClick}/>
-      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
+      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+    </svg></button>;
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewWorkForm onNewWorkCreation={this.handleAddingNewWorkToList} />;
-      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
+      returnButton = <button className="btn btn-outline-dark btn-sm" onClick={this.handleClick}><svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-arrow-left-short" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+      <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+    </svg></button>;
     } else {
       currentlyVisibleState = <WorkList onClickingNew={this.handleClick} workList={this.props.masterWorkList} onWorkSelection={this.handleChangingSelectedWork} />;
     }

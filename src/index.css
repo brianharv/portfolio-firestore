@@ -46,3 +46,11 @@ body {
   background-color: lightgrey;
   cursor: pointer;
 }
+
+.forms {
+  margin-top: 10px;
+}
+
+.formHolder {
+  margin-top: 100px;
+}
