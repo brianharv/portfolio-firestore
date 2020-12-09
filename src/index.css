@@ -31,3 +31,18 @@ body {
   font-size: 28px;
   padding: 0px 10px;
 }
+
+.squareWork {
+  align-items: center;
+  justify-content: center;
+  width: 220px;
+  height: 220px;
+  border: solid 1px black;
+  display: inline-flex;
+  margin: 20px 20px;
+}
+
+.squareWork:hover {
+  background-color: lightgrey;
+  cursor: pointer;
+}

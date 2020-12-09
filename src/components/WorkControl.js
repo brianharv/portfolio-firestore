@@ -22,7 +22,7 @@ class WorkControl extends React.Component {
   handleClick = () => {
     if (this.state.selectedWork != null) {
       this.setState({
-        selectedTicket: null,
+        selectedWork: null,
         editing: false
       });
     } else {
@@ -67,28 +67,27 @@ class WorkControl extends React.Component {
 
   render(){
     let currentlyVisibleState = null;
-    let buttonText = null;
+    let returnButton = null;
     if (this.state.editing) {
       currentlyVisibleState = <EditWorkForm work = {this.state.selectedWork} onEditWork = {this.handleEditingWorkInList} />
-      buttonText = "Return to Work List";
+      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
     } else if (this.state.selectedWork != null) {
       currentlyVisibleState = 
       <WorkDetail 
-        ticket = {this.state.selectedWork}
+        work = {this.state.selectedWork}
         onClickingDelete = {this.handleDeletingWork}
         onClickingEdit = {this.handleEditClick}/>
-      buttonText = "Return to Work List"
+      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
     } else if (this.props.formVisibleOnPage) {
       currentlyVisibleState = <NewWorkForm onNewWorkCreation={this.handleAddingNewWorkToList} />;
-      buttonText = "Return to Work List";
+      returnButton = <button className="btn btn-outline-dark" onClick={this.handleClick}>Return to Work List</button>;
     } else {
-      currentlyVisibleState = <WorkList workList={this.props.masterWorkList} onTicketSelection={this.handleChangingSelectedWork} />;
-      buttonText = "Add Work";
+      currentlyVisibleState = <WorkList onClickingNew={this.handleClick} workList={this.props.masterWorkList} onWorkSelection={this.handleChangingSelectedWork} />;
     }
     return(
       <React.Fragment>
-        {currentlyVisibleState}
-        <button className="btn btn-outline-dark" onClick={this.handleClick}>{buttonText}</button>
+        {currentlyVisibleState} 
+        {returnButton}
       </React.Fragment>
     )
   }
