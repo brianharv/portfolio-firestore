@@ -15,6 +15,10 @@ function ReusableForm(props) {
           type='text'
           name='description'
           placeholder='description' />
+      <textarea className="forms form-control"
+          type='text'
+          name='url'
+          placeholder='project URL' />
           <br></br>
           <button className="btn btn-outline-dark btn-sm btn-block" type='submit'>{props.buttonText}</button>
       </form>
@@ -30,6 +34,7 @@ function ReusableForm(props) {
 ReusableForm.propTypes= {
   name: PropTypes.string,
   description: PropTypes.string,
+  url: PropTypes.string,
   formSubmissionHandler: PropTypes.func
 }
 

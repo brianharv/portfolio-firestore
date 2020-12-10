@@ -15,11 +15,12 @@ function WorkList(props) {
   if (isLoaded(works)) {
     return (
       <React.Fragment>
-        <hr/>
         {works.map((work) => {
           return <Work
+          whenWorkClicked = { props.onWorkSelection }
           name = {work.name}
           description = {work.description}
+          url={work.url}
           id = {work.id}/>
         })}
         <br></br>

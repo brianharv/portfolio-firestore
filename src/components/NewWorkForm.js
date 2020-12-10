@@ -15,7 +15,7 @@ function NewWorkForm(props){
       {
         name: event.target.name.value,
         description: event.target.description.value,
-
+        url: event.target.url.value,
         timeOpen: firestore.FieldValue.serverTimestamp()
       }
     );

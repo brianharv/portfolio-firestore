@@ -14,12 +14,21 @@ body {
   padding-top: 20px;
 }
 
-.sidenav a {
+.sidenav a, #root > div.sidenav > p {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
   color: #818181;
   display: block;
+}
+
+#root > div.sidenav > p {
+  padding: 6px 8px 6px 16px;
+  text-decoration: none;
+  font-size: 14px;
+  color: #818181;
+  display: block;
+  font-style:italic;
 }
 
 .sidenav a:hover {
@@ -57,4 +66,17 @@ body {
 
 input {
   margin-bottom: 10px;
+}
+
+.squareWork h3 {
+  width: 100%;
+  font-size: 15px;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  word-wrap: break-word;
+}
+
+.white {
+  color: white;
 }

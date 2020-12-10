@@ -1,5 +1,5 @@
 import React from 'react';
-import Sidebar from './Sidebar';
+// import Sidebar from './Sidebar';
 import WorkControl from './WorkControl';
 import Signin from './Signin';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
@@ -8,8 +8,8 @@ function App() {
 
   return (
     <Router>
-      <Sidebar/>
-      <div className="main">
+      {/* <Sidebar/> */}
+      
       <Switch>
         <Route path="/signin">
           <Signin />
@@ -18,7 +18,6 @@ function App() {
           <WorkControl/>
           </Route>  
       </Switch>
-      </div>
     </Router>
   )
 }

@@ -9,7 +9,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router'
 import { Link } from 'react-router-dom';
-
+import firebase from "firebase/app";
+import Sidebar from './Sidebar';
 
 
 class WorkControl extends React.Component {
@@ -18,8 +19,13 @@ class WorkControl extends React.Component {
     super(props);
     this.state = {
       selectWork: null,
-      editing: false
+      editing: false,
+      user: null
     }
+    // adding this = dont have to sign in?
+    firebase.auth().onAuthStateChanged(user =>  {
+      this.setState({ user: user })
+    })
   }
 
   handleClick = () => {
@@ -46,14 +52,15 @@ class WorkControl extends React.Component {
       const firestoreWork = {
         name: work.get("name"),
         description: work.get("description"),
-        id: work.id
+        id: work.id,
+        url: work.get("url")
       }
       this.setState({ selectedWork: firestoreWork });
     });
   }
 
   handleDeletingWork = (id) => {
-    this.props.firestore.delete({collection: 'works', docs: id});
+    this.props.firestore.delete({collection: 'works', doc: id});
     this.setState({selectedWork: null});
   }
 
@@ -62,6 +69,9 @@ class WorkControl extends React.Component {
   }
 
   handleEditingWorkInList = () => {
+    // const editedMasterWorkList = this.props.masterWorkList
+    // .filter(work => work.id !== this.state.selectedWork.id)
+    // .concat(workToEdit);
     this.setState({
       editing: false,
       selectedWork: null
@@ -71,6 +81,7 @@ class WorkControl extends React.Component {
   render(){
 
     const auth = this.props.firebase.auth();
+
     if(!isLoaded(auth)) {
       return (
         <React.Fragment>
@@ -81,8 +92,14 @@ class WorkControl extends React.Component {
     if ((isLoaded(auth)) && (auth.currentUser == null)) {
       return (
         <React.Fragment>
-          <p className="">You must be signed in to access this page</p>
-          <button className="btn btn-outline-dark"><Link to="/signin">Sign In</Link></button>
+          <div className="row">
+            <div className="col-sm">
+          <p className="">you must be signed in to access this page</p>
+          <Link className="btn btn-outline-dark btn-sm btn-block" to="/signin">Sign In</Link>
+            </div>
+            <div className="col-sm"></div>
+
+          </div>
         </React.Fragment>
       )
     }
@@ -114,8 +131,11 @@ class WorkControl extends React.Component {
     }
     return (
       <React.Fragment>
-        {currentlyVisibleState} 
-        {returnButton}
+        <Sidebar/>
+        <div className="main">
+          {currentlyVisibleState} 
+          {returnButton}
+        </div>
       </React.Fragment>
       )
     }
