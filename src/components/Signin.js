@@ -27,7 +27,6 @@ function Signin() {
       });
     })
     .catch(function(error) {
-      // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
     });
@@ -41,6 +40,25 @@ function Signin() {
     });
   }
 
+  let visibleState = null;
+  if (firebase.auth().currentUser) {
+  visibleState = <p>You are signed in as {firebase.auth().currentUser.email}</p>
+  } else {
+      visibleState = <form className="form-group mt-4" onSubmit={doSignIn}>
+      <input
+        className="form-control"
+        type='text'
+        name='signinEmail'
+        placeholder='email' />
+      <input
+        className="form-control"
+        type='password'
+        name='signinPassword'
+        placeholder='Password' />
+      <button className="btn btn-outline-dark btn-sm btn-block" type='submit'>Sign In</button>
+    </form>    
+  }
+
     if (redirect) {
       return <Redirect to="/"/>
     } else {
@@ -50,20 +68,8 @@ function Signin() {
             <div className="main">
               <div className="row">
                 <div className="col-sm">
-                  <form className="form-group mt-4" onSubmit={doSignIn}>
-                    <input
-                      className="form-control"
-                      type='text'
-                      name='signinEmail'
-                      placeholder='email' />
-                    <input
-                      className="form-control"
-                      type='password'
-                      name='signinPassword'
-                      placeholder='Password' />
-                    <button className="btn btn-outline-dark btn-sm btn-block" type='submit'>Sign In</button>
-                  </form>
-          
+                  {visibleState}
+
                   <button className="btn btn-outline-dark btn-block btn-sm mb-2" onClick={doSignOut}>Sign Out</button>
                   <Link className="btn btn-outline-dark btn-block btn-sm" to="/"><svg width="1em" height="1em" viewBox="0 0 16 16" className="bi bi-house-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" d="M8 3.293l6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
