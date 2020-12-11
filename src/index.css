@@ -80,3 +80,8 @@ input {
 .white {
   color: white;
 }
+
+.signInUser {
+  position: fixed;
+  bottom: 0;
+}

@@ -4,9 +4,9 @@ import firebase from 'firebase/app';
 
 function Sidebar(){
 
-let user = "NOBODY!"
+let user = null;
 if (firebase.auth().currentUser ) {
-  user = firebase.auth().currentUser.email
+  user = "Signed in as: "+firebase.auth().currentUser.email;
 }
 
 return(
@@ -16,8 +16,8 @@ return(
       <a href="#">Work</a>
       <a href="#">About</a>
       <a href="#">Contact</a>
-      <Link to="/signin">Sign In</Link>
-      <p> Signed in as: <br></br> {user}</p>
+      <Link to="/signin">Log In</Link>
+      <p className="signInUser">{user}</p>
     </div>
   </React.Fragment>
 );

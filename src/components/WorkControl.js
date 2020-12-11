@@ -92,13 +92,16 @@ class WorkControl extends React.Component {
     if ((isLoaded(auth)) && (auth.currentUser == null)) {
       return (
         <React.Fragment>
-          <div className="row">
+          <Sidebar/>
+          <div className="main">
+            <div className="row">
             <div className="col-sm">
-          <p className="">you must be signed in to access this page</p>
-          <Link className="btn btn-outline-dark btn-sm btn-block" to="/signin">Sign In</Link>
-            </div>
+                <p className="">you must be signed in to access this page</p>
+                <Link className="btn btn-outline-dark btn-sm btn-block" to="/signin">Sign In</Link>
+                  </div>
             <div className="col-sm"></div>
 
+            </div>
           </div>
         </React.Fragment>
       )

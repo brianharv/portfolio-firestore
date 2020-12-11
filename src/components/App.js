@@ -14,7 +14,7 @@ function App() {
         <Route path="/signin">
           <Signin />
         </Route>
-        <Route patch="/">
+        <Route path="/">
           <WorkControl/>
           </Route>  
       </Switch>
